@@ -1,0 +1,47 @@
+ssh fathanas@s11-server
+sudo su
+#before going inside no zone is running, just the global zone
+cd /etc/zones
+ls
+cat SYSsolaris.xml
+#everytime we create a zone, the template SYSdefault.xml is going to be used to set a zone bot. If you do not want this to happen, you need to explicitly remove it or modify it.
+#template for Solaris 10 machines
+cat SYSsolaris10.xml 
+useradd john
+cat /etc/passwd | grep john
+vi /etc/ftpd/ftpusers # i can remove the root user, so he will be able to have access
+ipadm show-addr
+cat SYSsolaris.xml
+#zones that are currently running
+zoneadm list -cv
+#create and configure a new zone
+zonecfg -z zoneA
+create
+set zonepath
+zfs create rpool/zone => in  another terminal
+zfs set mountpoint=/zones rpool/zones
+zfs list
+=>back to the create terminal
+set zonepath=/zones/zonea
+add net
+set physical=net1
+end
+set autoboot=true
+verify
+end 
+exit
+#new xml file for the zoneA
+
+zonecfg -z zoneA
+remove anet linkname=net0
+exit
+cat zoneA.xml
+zoneadm list -iv #installed and running zones
+zoneadm list -cv # here i can see the configure zones
+zfs list #datapool of our interest
+zoneamd -z zoneA installed#new mount point created in 
+ps -ef | grep zoneadmd
+zlogin -C zoneA
+
+
+
