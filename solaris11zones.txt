@@ -40,7 +40,7 @@ zoneadm list -iv #installed and running zones
 zoneadm list -cv # here i can see the configure zones
 zfs list #datapool of our interest
 zoneamd -z zoneA installed#new mount point created in 
-ps -ef | grep zoneadmd
+ps -ef | grep zoneadmd #daemon for booting the zones
 zlogin -C zoneA
 
 
